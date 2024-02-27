@@ -1,0 +1,19 @@
+resource "aws_eks_cluster" "this" {
+  name     = var.cluster_name
+  role_arn = aws_iam_role.this.arn
+
+  vpc_config {
+    subnet_ids = var.subnet_ids
+  }
+}
+
+/*
+resource "aws_cloudwatch_log_group" "this" {
+  # The log group name format is /aws/eks/<cluster-name>/cluster
+  # Reference: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+  name              = "/aws/eks/${var.cluster_name}/cluster"
+  retention_in_days = 7
+
+  # ... potentially other configuration ...
+}
+*/
